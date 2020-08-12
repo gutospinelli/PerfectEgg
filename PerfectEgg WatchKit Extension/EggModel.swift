@@ -42,6 +42,29 @@ struct EggModel<CardContent> where CardContent : Equatable
         var img : Image
         var boilTimeInSeconds : Int
         var onScreen : Bool
+        
+        //how long this card has ever been face up
+        private var faceUpTime: TimeInterval {
+            if let lastFaceUpDate = self.lastFaceUpDate {
+                return pastFaceUpTime + Date().timeIntervalSince(lastFaceUpDate)
+            } else {
+                return pastFaceUpTime
+            }
+        }
+        // the last time this card was turned face up (and is still face up)
+        var lastFaceUpDate: Date?
+        // the accumulated time this card has been face up in the past
+        // (i.e. not including the current time it's been face up if it is currently so)
+        var pastFaceUpTime: TimeInterval = 0
+        
+        // how much time left before the bonus opportunity runs out
+        var bonusTimeRemaining: TimeInterval {
+            max(0, Double(boilTimeInSeconds) - faceUpTime)
+        }
+        // percentage of the bonus time remaining
+        var bonusRemaining: Double {
+            (boilTimeInSeconds > 0 && bonusTimeRemaining > 0) ? bonusTimeRemaining/Double(boilTimeInSeconds) : 0
+        }
     }
 
 }

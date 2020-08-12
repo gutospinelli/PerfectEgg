@@ -11,9 +11,10 @@ import SwiftUI
 struct ContentView: View {
     @ObservedObject var vmEgg: EggVM
     
-    @State private var animatedBonusRemaining : Double = 0
+    @State private var animatedBonusRemaining : Double = 1
     @State private var timeRemaining : Int = 10
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
+    
     
     
     var body: some View {
@@ -42,10 +43,17 @@ struct ContentView: View {
                                 }
                                 
                                 VStack {
-                                        Text("\(self.timeRemaining)").onAppear {
-                                            self.timeRemaining = card.boilTimeInSeconds
-                                        }
-                                        Pie(startAngle: Angle.degrees(0-90), endAngle: Angle.degrees(360-90),clockwise: true)
+                                    Text("\(self.timeRemaining)")
+                                    Pie(startAngle: Angle.degrees(0-90), endAngle: Angle.degrees(-self.animatedBonusRemaining*360-90),clockwise: true)
+                                        .onAppear {
+                                            self.animatedBonusRemaining = card.bonusRemaining
+                                            withAnimation(.linear(duration: card.bonusTimeRemaining)) {
+                                                self.animatedBonusRemaining = 0
+                                            }
+                                            
+                                    }
+                                }.onAppear {
+                                    self.timeRemaining = card.boilTimeInSeconds
                                 }
                             }
                         }
