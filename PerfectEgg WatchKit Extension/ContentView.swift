@@ -36,10 +36,13 @@ struct ContentView: View {
                     ForEach(vmEgg.cards) { card in
                         HStack {
                             if card.onScreen {
-                                card.img.resizable()
                                 
                                 VStack {
-                                    Text("\(self.timeRemaining)")
+                                    card.img.resizable()
+                                }
+                                
+                                VStack {                                    
+                                    Text(card.description)
                                     Pie(startAngle: Angle.degrees(0-90), endAngle: Angle.degrees(-self.animatedBonusRemaining*360-90),clockwise: true)
                                         .onAppear {
                                             self.animatedBonusRemaining = card.bonusRemaining
@@ -48,6 +51,7 @@ struct ContentView: View {
                                             }
                                             
                                     }
+                                    Text("\(self.timeRemaining)")
                                 }.onAppear {
                                     self.timeRemaining = card.boilTimeInSeconds
                                 }

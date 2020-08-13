@@ -28,11 +28,12 @@ struct EggModel<CardContent> where CardContent : Equatable
         for index in 0..<numberOfCards
         {
             let content = cardContentFactory(index)
-//            let boilTime = (Int("\(content)") ?? 0) * 1 //TODO: Change to below
-            let boilTime = (index == numberOfCards-1) ? 180 : 120
+            let boilTime = (Int("\(content)") ?? 0) //TODO: Change to below
+//            let boilTime = (index == numberOfCards-1) ? 180 : 120
             let onScreen = (index == numberOfCards-1) ? true : false
+            let descriptions = ["too much","hard","creamy","mollet","hot","raw"]
             
-            cards.append(Card(content: content, id: index, img: Image("eggtime\(content)"), boilTimeInSeconds: boilTime, onScreen: onScreen))
+            cards.append(Card(content: content, id: index, img: Image("eggtime\(content)"), boilTimeInSeconds: boilTime, onScreen: onScreen, description: descriptions[index]))
         }
     }
     
@@ -43,6 +44,7 @@ struct EggModel<CardContent> where CardContent : Equatable
         var img : Image
         var boilTimeInSeconds : Int
         var onScreen : Bool
+        var description : String
         
         //how long this card has ever been face up
         private var faceUpTime: TimeInterval {
