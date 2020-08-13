@@ -30,8 +30,8 @@ class EggVM : ObservableObject {
     
     
     // MARK: - User Intent(s)
-    func select(card : EggModel<String>.Card) {
-        timer.select(card: card)
+    func goToNextEgg() {
+        timer.goToNextEgg()
     }
     
     func reset() {

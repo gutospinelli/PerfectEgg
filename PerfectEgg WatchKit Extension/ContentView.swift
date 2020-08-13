@@ -36,11 +36,7 @@ struct ContentView: View {
                     ForEach(vmEgg.cards) { card in
                         HStack {
                             if card.onScreen {
-                                card.img.resizable().onTapGesture {
-                                    withAnimation(.default) {
-                                        self.vmEgg.select(card: card)
-                                    }
-                                }
+                                card.img.resizable()
                                 
                                 VStack {
                                     Text("\(self.timeRemaining)")
@@ -57,9 +53,14 @@ struct ContentView: View {
                                 }
                             }
                         }
+                        .rotation3DEffect(Angle.degrees(card.onScreen ? 360 : 0), axis: (x: 0, y: 1, z: 0))
                     }.onReceive(self.timer) { _ in
                         if self.timeRemaining > 0 {
                             self.timeRemaining -= 1
+                        } else {
+                            withAnimation(.easeOut(duration: 0.7)) {
+                                self.vmEgg.goToNextEgg()
+                            }
                         }
                     }
                 }

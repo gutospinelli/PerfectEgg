@@ -13,7 +13,7 @@ struct EggModel<CardContent> where CardContent : Equatable
     private (set) var cards : Array<Card>
 
     
-    mutating func select(card: Card) {
+    mutating func goToNextEgg() {
         cards.popLast()
         
         if let newOnScreenIndex = cards.last?.id {
@@ -28,7 +28,8 @@ struct EggModel<CardContent> where CardContent : Equatable
         for index in 0..<numberOfCards
         {
             let content = cardContentFactory(index)
-            let boilTime = (Int("\(content)") ?? 0) * 1 //TODO: Change to 60
+//            let boilTime = (Int("\(content)") ?? 0) * 1 //TODO: Change to below
+            let boilTime = (index == numberOfCards-1) ? 180 : 120
             let onScreen = (index == numberOfCards-1) ? true : false
             
             cards.append(Card(content: content, id: index, img: Image("eggtime\(content)"), boilTimeInSeconds: boilTime, onScreen: onScreen))
