@@ -35,7 +35,7 @@ As the timer passes by, our eggs (and therefore our model) is changed by the mut
 * StartView.Swift
 
   * StartView is the first view the user sees. There, you can chose how you want your eggs to be boiled and start the timer.
-![Start View](./images/start.png)
+ ![Start View](./images/start.png)
 
 * ContentView.Swift
 
