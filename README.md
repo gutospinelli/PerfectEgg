@@ -20,7 +20,7 @@ Swift Language and SwiftUI for the GUI.
 
 ### Built With
 
-I've developed this simple project with the ** MVI (Model-View-Intent) ** pattern in mind.
+I've developed this simple project with the **MVI (Model-View-Intent)** pattern in mind.
 
 MVI is a pattern that goes well with reactive programming and that matches SwiftUI to perfection.
 
